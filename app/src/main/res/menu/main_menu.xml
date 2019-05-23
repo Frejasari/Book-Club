@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="stats" android:icon="@drawable/ic_stats_24dp" android:id="@+id/stats"
+          app:showAsAction="always"/>
+    <item android:title="all" android:icon="@drawable/ic_all_24dp" android:id="@+id/all" app:showAsAction="always"/>
+    <item android:title="current" android:icon="@drawable/ic_current_24dp" app:showAsAction="always"
+          android:id="@+id/current"/>
+    <item android:title="self" android:icon="@drawable/ic_profile_24dp" android:id="@+id/self"
+          app:showAsAction="always"/>
+</menu>
