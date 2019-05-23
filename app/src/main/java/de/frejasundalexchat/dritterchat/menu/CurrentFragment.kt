@@ -1,4 +1,4 @@
-package de.frejasundalexchat.dritterchat
+package de.frejasundalexchat.dritterchat.menu
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import de.frejasundalexchat.dritterchat.R
 
 
 class CurrentFragment : Fragment() {
@@ -20,7 +21,7 @@ class CurrentFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.current_fragment, container, false)
+        return inflater.inflate(R.layout.current_reading_cycle_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

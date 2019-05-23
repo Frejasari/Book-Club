@@ -1,4 +1,4 @@
-package de.frejasundalexchat.dritterchat
+package de.frejasundalexchat.dritterchat.menu
 
 import androidx.lifecycle.ViewModel;
 
