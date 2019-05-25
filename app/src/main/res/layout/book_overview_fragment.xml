@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".menu.BookOverviewFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+            tools:listitem="@layout/book_list_item"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="10"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="ALL"
-            android:textSize="80sp"/>
+            android:layout_height="0dp" android:id="@+id/bookRecyclerView" android:layout_weight="2">
+    </androidx.recyclerview.widget.RecyclerView>
+    <Button
+            android:text="Add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/addBookButton" android:layout_weight="0"/>
 
-</FrameLayout>
+</LinearLayout>

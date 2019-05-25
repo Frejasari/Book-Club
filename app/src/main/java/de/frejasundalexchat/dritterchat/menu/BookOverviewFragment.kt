@@ -1,12 +1,16 @@
 package de.frejasundalexchat.dritterchat.menu
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import de.frejasundalexchat.dritterchat.R
 
 class BookOverviewFragment : Fragment() {
@@ -21,7 +25,29 @@ class BookOverviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.book_overview_fragment, container, false)
+        val view = inflater.inflate(R.layout.book_overview_fragment, container, false)
+
+        val bookRecyclerView = view.findViewById<RecyclerView>(R.id.bookRecyclerView)
+        bookRecyclerView.layoutManager = LinearLayoutManager(view.context)
+        val bookListAdapter = BookListAdapter()
+        bookRecyclerView.adapter = bookListAdapter
+
+        bookListAdapter.books = listOf(
+            BookItem("Buch1", "https://www.gruender.de/wp-content/uploads/2016/01/buch-schreiben.png"),
+            BookItem(
+                "NEXT",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Book_icon_%28closed%29_-_Blue_and_gold.svg/170px-Book_icon_%28closed%29_-_Blue_and_gold.svg.png"
+            ),
+            BookItem("DANACH", "https://lorempixel.com/400/200/"),
+            BookItem("DANACH", "https://lorempixel.com/400/200/"),
+            BookItem("DANACH", "https://lorempixel.com/400/200/"),
+            BookItem("DANACH", "https://lorempixel.com/400/200/"),
+            BookItem("DANACH", "https://lorempixel.com/400/200/"),
+            BookItem("DANACH", "https://lorempixel.com/400/200/")
+            )
+        bookListAdapter.notifyDataSetChanged()
+
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -30,4 +56,30 @@ class BookOverviewFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
+}
+
+data class BookItem(val title: String, val imgUrl: String)
+
+class BookListAdapter : RecyclerView.Adapter<BookItemViewHolder>() {
+
+    var books: List<BookItem> = listOf()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookItemViewHolder {
+        return BookItemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.book_list_item, parent, false))
+    }
+
+    override fun getItemCount(): Int {
+        return books.size
+    }
+
+    override fun onBindViewHolder(holder: BookItemViewHolder, position: Int) {
+        holder.title.text = books[position].title
+        Picasso.get().load(books[position].imgUrl).into(holder.cover)
+    }
+
+}
+
+class BookItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    val title: TextView = view.findViewById(R.id.bookTitle)
+    val cover: ImageView = view.findViewById(R.id.bookCover)
 }
