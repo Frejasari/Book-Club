@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
@@ -21,8 +22,10 @@ class CreateBookFragment : Fragment() {
     private var title: String? = null
     private var coverUrl: String? = null
 
-    private lateinit var titleInput: EditText;
-    private lateinit var coverUrlInput: EditText;
+    private lateinit var titleInput: EditText
+    private lateinit var coverUrlInput: EditText
+    private lateinit var saveButton: Button
+    private lateinit var abortButton: Button
 
     companion object {
         fun newInstance(): CreateBookFragment {
@@ -43,14 +46,18 @@ class CreateBookFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_create_book, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_create_book, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         titleInput = view.findViewById(R.id.bookTitleInput)
         coverUrlInput = view.findViewById(R.id.imgUrlInput)
+        saveButton = view.findViewById(R.id.saveBookButton)
+        abortButton = view.findViewById(R.id.abortButton)
+
+        abortButton.setOnClickListener { activity?.finish() }
+
         title?.apply { titleInput.setText(title) }
         coverUrl?.apply { coverUrlInput.setText(coverUrl) }
 
