@@ -11,9 +11,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:menu="@menu/main_menu"
-            app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/menu"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/menu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:background="@color/design_default_color_background"
+    />
     <FrameLayout
             android:layout_width="0dp"
             android:layout_height="0dp" app:layout_constraintTop_toTopOf="parent"

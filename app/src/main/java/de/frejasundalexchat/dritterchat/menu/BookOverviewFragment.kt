@@ -1,9 +1,11 @@
 package de.frejasundalexchat.dritterchat.menu
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import de.frejasundalexchat.dritterchat.R
+import de.frejasundalexchat.dritterchat.bookOverview.CreateBookActivity
 
 class BookOverviewFragment : Fragment() {
 
@@ -20,6 +23,7 @@ class BookOverviewFragment : Fragment() {
     }
 
     private lateinit var viewModel: BookOverviewViewModel
+    private lateinit var addBookButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +48,11 @@ class BookOverviewFragment : Fragment() {
             BookItem("DANACH", "https://lorempixel.com/400/200/"),
             BookItem("DANACH", "https://lorempixel.com/400/200/"),
             BookItem("DANACH", "https://lorempixel.com/400/200/")
-            )
+        )
         bookListAdapter.notifyDataSetChanged()
+
+        addBookButton = view.findViewById(R.id.addBookButton)
+        addBookButton.setOnClickListener { showEditDialog() }
 
         return view
     }
@@ -56,6 +63,9 @@ class BookOverviewFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
+    private fun showEditDialog() {
+        context!!.startActivity(Intent(context, CreateBookActivity::class.java))
+    }
 }
 
 data class BookItem(val title: String, val imgUrl: String)
@@ -81,5 +91,5 @@ class BookListAdapter : RecyclerView.Adapter<BookItemViewHolder>() {
 
 class BookItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val title: TextView = view.findViewById(R.id.bookTitle)
-    val cover: ImageView = view.findViewById(R.id.bookCover)
+    val cover: ImageView = view.findViewById(R.id.bookCoverInput)
 }
