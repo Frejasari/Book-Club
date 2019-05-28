@@ -11,7 +11,12 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
+import com.google.android.material.textfield.TextInputLayout
 import de.frejasundalexchat.dritterchat.R
+import de.frejasundalexchat.dritterchat.db.ObjectBox
+import de.frejasundalexchat.dritterchat.error.ValidationError
+import de.frejasundalexchat.dritterchat.model.Book
+import io.objectbox.kotlin.boxFor
 
 
 private const val TITLE = "book title"
@@ -19,13 +24,15 @@ private const val COVERURL = "book cover url"
 
 class CreateBookFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var title: String? = null
-    private var coverUrl: String? = null
+    private var title: String = ""
+    private var coverUrl: String = ""
 
     private lateinit var titleInput: EditText
     private lateinit var coverUrlInput: EditText
     private lateinit var saveButton: Button
     private lateinit var abortButton: Button
+
+    private val bookBox = ObjectBox.get().boxFor(Book::class)
 
     companion object {
         fun newInstance(): CreateBookFragment {
@@ -37,8 +44,8 @@ class CreateBookFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            title = it.getString(TITLE)
-            coverUrl = it.getString(COVERURL)
+            title = it.getString(TITLE) ?: ""
+            coverUrl = it.getString(COVERURL) ?: ""
         }
     }
 
@@ -57,9 +64,11 @@ class CreateBookFragment : Fragment() {
         abortButton = view.findViewById(R.id.abortButton)
 
         abortButton.setOnClickListener { activity?.finish() }
+        saveButton.setOnClickListener(this::onSave)
 
-        title?.apply { titleInput.setText(title) }
-        coverUrl?.apply { coverUrlInput.setText(coverUrl) }
+
+        title.apply { titleInput.setText(title) }
+        coverUrl.apply { coverUrlInput.setText(coverUrl) }
 
         titleInput.addOnTextChangedListener { text -> title = text }
         coverUrlInput.addOnTextChangedListener { text -> coverUrl = text }
@@ -69,15 +78,38 @@ class CreateBookFragment : Fragment() {
         outState.putString(TITLE, title)
         outState.putString(COVERURL, coverUrl)
         super.onSaveInstanceState(outState)
+    }
 
+    private fun onSave(saveButton: View) {
+        val errors = this.validateInput()
+        if (errors.isEmpty()) {
+            bookBox.put(Book(0, title, coverUrl, 100))
+            activity?.finish()
+        } else {
+            errors.forEach { view!!.findViewById<TextInputLayout>(it.viewId).error = it.message }
+        }
+    }
+
+    private fun validateInput(): List<ValidationError> {
+        val errors = mutableListOf<ValidationError>()
+        if (this.title.isBlank()) {
+            errors.add(ValidationError(R.id.bookNameInputLayout, "Please set a title."))
+        }
+        if (this.coverUrl.isBlank()) {
+            errors.add(ValidationError(R.id.imgUrlInputLayout, "Please select a valid image.")) // TODO
+        }
+        return errors
     }
 }
 
-fun EditText.addOnTextChangedListener(onChange: (s: String?) -> Unit) {
+fun EditText.addOnTextChangedListener(onChange: (s: String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {}
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            if (s.isNullOrBlank()) {
+                onChange("")
+            }
             onChange(s.toString())
         }
     })
