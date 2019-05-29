@@ -46,39 +46,13 @@ class BookOverviewFragment : Fragment() {
         bookRecyclerView.layoutManager = LinearLayoutManager(view.context)
         val bookListAdapter = BookListAdapter()
         bookRecyclerView.adapter = bookListAdapter
-
-        if (bookBox.isEmpty) {
-            bookBox.put(
-                listOf(
-                    Book(0, "Buch1", "https://www.gruender.de/wp-content/uploads/2016/01/buch-schreiben.png", 100),
-                    Book(
-                        0,
-                        "NEXT",
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Book_icon_%28closed%29_-_Blue_and_gold.svg/170px-Book_icon_%28closed%29_-_Blue_and_gold.svg.png",
-                        300
-                    ),
-                    Book(0, "Buch1", "https://www.gruender.de/wp-content/uploads/2016/01/buch-schreiben.png", 100),
-                    Book(
-                        0,
-                        "NEXT",
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Book_icon_%28closed%29_-_Blue_and_gold.svg/170px-Book_icon_%28closed%29_-_Blue_and_gold.svg.png",
-                        300
-                    ),
-                    Book(0, "Buch1", "https://www.gruender.de/wp-content/uploads/2016/01/buch-schreiben.png", 100),
-                    Book(
-                        0,
-                        "NEXT",
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Book_icon_%28closed%29_-_Blue_and_gold.svg/170px-Book_icon_%28closed%29_-_Blue_and_gold.svg.png",
-                        300
-                    )
-                )
-            )
-        }
-
         val query = bookBox.query().build()
         query.subscribe(dataSubscriptionList)
             .on(AndroidScheduler.mainThread())
-            .observer { data -> bookListAdapter.books = data; bookListAdapter.notifyDataSetChanged() }
+            .observer { data ->
+                bookListAdapter.books = data.reversed();
+                bookListAdapter.notifyDataSetChanged()
+            }
 
         addBookButton = view.findViewById(R.id.addBookButton)
         addBookButton.setOnClickListener { showEditDialog() }
