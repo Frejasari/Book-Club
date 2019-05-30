@@ -1,11 +1,9 @@
 package de.frejasundalexchat.dritterchat.bookOverview
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -28,7 +26,6 @@ class BookOverviewFragment : Fragment() {
     }
 
     private lateinit var viewModel: BookOverviewViewModel
-    private lateinit var addBookButton: Button
 
     private val dataSubscriptionList = DataSubscriptionList()
 
@@ -53,9 +50,6 @@ class BookOverviewFragment : Fragment() {
                 bookListAdapter.notifyDataSetChanged()
             }
 
-        addBookButton = view.findViewById(R.id.addBookButton)
-        addBookButton.setOnClickListener { showEditDialog() }
-
         return view
     }
 
@@ -68,10 +62,6 @@ class BookOverviewFragment : Fragment() {
     override fun onDestroyView() {
         dataSubscriptionList.cancel()
         super.onDestroyView()
-    }
-
-    private fun showEditDialog() {
-        context!!.startActivity(Intent(context, CreateBookActivity::class.java))
     }
 }
 

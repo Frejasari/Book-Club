@@ -13,6 +13,13 @@
           android:id="@+id/all"
           app:showAsAction="always"
     />
+
+    <item android:title="add"
+          android:icon="@drawable/ic_add"
+          android:id="@+id/add"
+          app:showAsAction="always"
+    />
+
     <item android:title="current"
           android:icon="@drawable/ic_current_24dp"
           app:showAsAction="always"
