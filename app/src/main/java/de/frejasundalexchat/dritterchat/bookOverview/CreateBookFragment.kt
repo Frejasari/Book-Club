@@ -23,7 +23,7 @@ import com.squareup.picasso.Picasso
 import de.frejasundalexchat.dritterchat.R
 import de.frejasundalexchat.dritterchat.db.ObjectBox
 import de.frejasundalexchat.dritterchat.error.ValidationError
-import de.frejasundalexchat.dritterchat.model.Book
+import de.frejasundalexchat.dritterchat.db.model.Book
 import io.objectbox.kotlin.boxFor
 import org.threeten.bp.LocalDateTime
 import java.io.File

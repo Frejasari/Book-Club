@@ -1,4 +1,4 @@
-package de.frejasundalexchat.dritterchat.menu
+package de.frejasundalexchat.dritterchat.bookOverview
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,9 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import de.frejasundalexchat.dritterchat.R
-import de.frejasundalexchat.dritterchat.bookOverview.CreateBookActivity
 import de.frejasundalexchat.dritterchat.db.ObjectBox
-import de.frejasundalexchat.dritterchat.model.Book
+import de.frejasundalexchat.dritterchat.db.model.Book
 import io.objectbox.android.AndroidScheduler
 import io.objectbox.kotlin.boxFor
 import io.objectbox.reactive.DataSubscriptionList
@@ -81,7 +80,13 @@ class BookListAdapter : RecyclerView.Adapter<BookItemViewHolder>() {
     var books: List<Book> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookItemViewHolder {
-        return BookItemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.book_list_item, parent, false))
+        return BookItemViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.book_list_item,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int {

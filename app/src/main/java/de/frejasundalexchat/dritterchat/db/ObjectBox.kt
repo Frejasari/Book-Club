@@ -1,7 +1,7 @@
 package de.frejasundalexchat.dritterchat.db
 
 import android.content.Context
-import de.frejasundalexchat.dritterchat.model.MyObjectBox
+import de.frejasundalexchat.dritterchat.db.model.MyObjectBox
 import io.objectbox.BoxStore
 
 

@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import de.frejasundalexchat.dritterchat.menu.BookOverviewFragment
+import de.frejasundalexchat.dritterchat.bookOverview.BookOverviewFragment
 import de.frejasundalexchat.dritterchat.menu.CurrentFragment
 import de.frejasundalexchat.dritterchat.menu.ProfileFragment
 import de.frejasundalexchat.dritterchat.menu.StatsFragment

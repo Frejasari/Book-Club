@@ -1,4 +1,4 @@
-package de.frejasundalexchat.dritterchat.model
+package de.frejasundalexchat.dritterchat.db.model
 
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
