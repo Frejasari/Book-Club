@@ -5,18 +5,26 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".bookOverview.BookOverviewFragment">
+        tools:context=".bookOverview.BookOverviewFragment"
+        android:background="#547e7a"
+>
 
     <androidx.recyclerview.widget.RecyclerView
             tools:listitem="@layout/book_list_item"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="10"
             android:layout_width="match_parent"
-            android:layout_height="0dp" android:id="@+id/bookRecyclerView" android:layout_weight="2">
+            android:layout_height="0dp"
+            android:id="@+id/bookRecyclerView"
+            android:layout_weight="2">
     </androidx.recyclerview.widget.RecyclerView>
+
     <Button
-            android:text="Add"
+            android:id="@+id/addBookButton"
+            android:text="@string/add_book_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/addBookButton" android:layout_weight="0"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+    />
 
 </LinearLayout>

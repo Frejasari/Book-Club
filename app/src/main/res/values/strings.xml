@@ -11,4 +11,5 @@
     <string name="create_book_abort">Abort</string>
     <string name="create_book_save">Save</string>
     <string name="create_book_notes">Notes</string>
+    <string name="add_book_button">Add</string>
 </resources>

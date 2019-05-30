@@ -100,21 +100,20 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/create_book_page_count_hint"
                 />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/notesInputLayout"
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/notesInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp">
+                <EditText
+                        android:id="@+id/notesInput"
+                        android:inputType="text|textMultiLine"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="0dp">
-                    <EditText
-                            android:id="@+id/notesInput"
-                            android:inputType="text|textMultiLine"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/create_book_notes"
-                    />
-                </com.google.android.material.textfield.TextInputLayout>
-
+                        android:hint="@string/create_book_notes"
+                />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>

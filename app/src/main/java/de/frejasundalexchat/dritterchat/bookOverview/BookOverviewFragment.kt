@@ -94,13 +94,24 @@ class BookListAdapter : RecyclerView.Adapter<BookItemViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: BookItemViewHolder, position: Int) {
-        holder.title.text = books[position].title
-        Picasso.get().load(books[position].imgUrl).into(holder.cover)
+        val book = books[position]
+        holder.title.text = book.title
+        if (book.author.isEmpty()) {
+            holder.author.text = "No Author"
+        } else {
+            holder.author.text = book.author
+        }
+        holder.totalPages.text = "0 / ${book.pageCount}"
+        if (!book.imgUrl.isNullOrBlank()) {
+            Picasso.get().load(book.imgUrl).into(holder.cover)
+        }
     }
 
 }
 
 class BookItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val title: TextView = view.findViewById(R.id.bookTitle)
+    val author: TextView = view.findViewById(R.id.bookAuthor)
+    val totalPages: TextView = view.findViewById(R.id.totalPageCount)
     val cover: ImageView = view.findViewById(R.id.bookCoverInput)
 }
