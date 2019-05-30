@@ -22,8 +22,8 @@ import com.google.android.material.textfield.TextInputLayout
 import com.squareup.picasso.Picasso
 import de.frejasundalexchat.dritterchat.R
 import de.frejasundalexchat.dritterchat.db.ObjectBox
-import de.frejasundalexchat.dritterchat.error.ValidationError
 import de.frejasundalexchat.dritterchat.db.model.Book
+import de.frejasundalexchat.dritterchat.error.ValidationError
 import io.objectbox.kotlin.boxFor
 import org.threeten.bp.LocalDateTime
 import java.io.File
@@ -64,7 +64,7 @@ class CreateBookFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
+        savedInstanceState?.let {
             coverUri = it.getString(COVERURI) ?: ""
         }
     }
@@ -92,6 +92,8 @@ class CreateBookFragment : Fragment() {
         abortButton.setOnClickListener { activity?.finish() }
         backArrow.setOnClickListener { activity?.finish() }
         saveButton.setOnClickListener(this::onSave)
+
+        loadAndShowCoverImage()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -103,7 +105,13 @@ class CreateBookFragment : Fragment() {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val file = File(currentPhotoPath)
             coverUri = Uri.fromFile(file).toString()
-            Picasso.get().load(coverUri).into(coverImagePreview)
+            loadAndShowCoverImage()
+        }
+    }
+
+    private fun loadAndShowCoverImage() {
+        if (coverUri.isNotBlank()) {
+            Picasso.get().load(coverUri).fit().centerCrop().into(coverImagePreview)
         }
     }
 

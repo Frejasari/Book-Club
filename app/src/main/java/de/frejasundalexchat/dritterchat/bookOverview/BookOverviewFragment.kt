@@ -93,7 +93,9 @@ class BookListAdapter : RecyclerView.Adapter<BookItemViewHolder>() {
         }
         holder.totalPages.text = "0 / ${book.pageCount}"
         if (!book.imgUrl.isNullOrBlank()) {
-            Picasso.get().load(book.imgUrl).into(holder.cover)
+            Picasso.get().load(book.imgUrl).fit().centerCrop().into(holder.cover)
+        } else {
+            holder.cover.setImageDrawable(null)
         }
     }
 
