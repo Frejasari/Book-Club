@@ -25,6 +25,7 @@ import de.frejasundalexchat.dritterchat.db.ObjectBox
 import de.frejasundalexchat.dritterchat.error.ValidationError
 import de.frejasundalexchat.dritterchat.model.Book
 import io.objectbox.kotlin.boxFor
+import org.threeten.bp.LocalDateTime
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -38,11 +39,12 @@ class CreateBookFragment : Fragment() {
 
     private val REQUEST_IMAGE_CAPTURE = 19
 
-    // TODO: Rename and change types of parameters
-    private var title: String = ""
     private var coverUri: String = ""
 
     private lateinit var titleInput: EditText
+    private lateinit var authorInput: EditText
+    private lateinit var pageCountInput: EditText
+    private lateinit var notesInput: EditText
     private lateinit var saveButton: Button
     private lateinit var abortButton: Button
     private lateinit var selectPictureButton: View
@@ -63,7 +65,6 @@ class CreateBookFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            title = it.getString(TITLE) ?: ""
             coverUri = it.getString(COVERURI) ?: ""
         }
     }
@@ -77,7 +78,10 @@ class CreateBookFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        titleInput = view.findViewById(R.id.bookTitleInput)
+        titleInput = view.findViewById(R.id.titleInput)
+        authorInput = view.findViewById(R.id.authorInput)
+        pageCountInput = view.findViewById(R.id.pageCountInput)
+        notesInput = view.findViewById(R.id.notesInput)
         saveButton = view.findViewById(R.id.saveBookButton)
         abortButton = view.findViewById(R.id.abortButton)
         selectPictureButton = view.findViewById(R.id.coverImagePreview)
@@ -88,14 +92,9 @@ class CreateBookFragment : Fragment() {
         abortButton.setOnClickListener { activity?.finish() }
         backArrow.setOnClickListener { activity?.finish() }
         saveButton.setOnClickListener(this::onSave)
-
-        title.apply { titleInput.setText(title) }
-
-        titleInput.addOnTextChangedListener { text -> title = text }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putString(TITLE, title)
         outState.putString(COVERURI, coverUri)
         super.onSaveInstanceState(outState)
     }
@@ -111,7 +110,18 @@ class CreateBookFragment : Fragment() {
     private fun onSave(saveButton: View) {
         val errors = this.validateInput()
         if (errors.isEmpty()) {
-            bookBox.put(Book(0, title, coverUri, 100))
+            bookBox.put(
+                Book(
+                    0, // new Object, initialized with 0
+                    LocalDateTime.now().toString(),
+                    titleInput.text.toString(),
+                    authorInput.text.toString(),
+                    pageCountInput.getTextAsInt(),
+                    notesInput.text.toString(),
+                    coverUri
+//                    listOf(notesInput.text.toString())
+                )
+            )
             activity?.finish()
         } else {
             errors.forEach { view!!.findViewById<TextInputLayout>(it.viewId).error = it.message }
@@ -165,8 +175,8 @@ class CreateBookFragment : Fragment() {
 
     private fun validateInput(): List<ValidationError> {
         val errors = mutableListOf<ValidationError>()
-        if (this.title.isBlank()) {
-            errors.add(ValidationError(R.id.bookNameInputLayout, "Please set a title."))
+        if (titleInput.text.isBlank()) {
+            errors.add(ValidationError(R.id.bookTitleInputLayout, "Please set a title."))
         }
         return errors
     }
@@ -202,6 +212,11 @@ fun View.getChildTree(level: Int) {
             )
         }
     }
+}
+
+fun EditText.getTextAsInt(): Int {
+    return if (text.toString().isBlank()) 0
+    else text.toString().toInt()
 }
 
 fun getLevelIcon(level: Int): String {
