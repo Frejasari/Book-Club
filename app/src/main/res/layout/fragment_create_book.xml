@@ -64,8 +64,10 @@
                     android:id="@+id/bookTitleInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp">
-                <EditText
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/titleInput"
                         android:inputType="text|textMultiLine"
                         android:layout_width="match_parent"
@@ -78,42 +80,45 @@
                     android:id="@+id/bookAuthorInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp">
-                <EditText
+                    android:layout_marginBottom="8dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/authorInput"
                         android:inputType="text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/create_book_author_hint"
-                />
+                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/pageCountInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp">
-                <EditText
+                    android:layout_marginBottom="8dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/pageCountInput"
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/create_book_page_count_hint"
-                />
+                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/notesInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="0dp">
-                <EditText
+                    android:layout_marginBottom="0dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/notesInput"
                         android:inputType="text|textMultiLine"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/create_book_notes"
-                />
+                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -131,7 +136,7 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintTop_toTopOf="@+id/saveBookButton"
-            style="@style/Widget.AppCompat.Button.Borderless"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
             android:textColor="#E91E63"/>
     <Button
             android:id="@+id/saveBookButton"
@@ -143,6 +148,6 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintStart_toEndOf="@+id/abortButton"
             android:layout_marginStart="8dp"
-            style="@style/Widget.AppCompat.Button.Borderless"/>
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
