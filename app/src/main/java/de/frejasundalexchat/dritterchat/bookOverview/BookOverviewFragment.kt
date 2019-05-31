@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import de.frejasundalexchat.dritterchat.R
@@ -39,7 +39,7 @@ class BookOverviewFragment : Fragment() {
         val view = inflater.inflate(R.layout.book_overview_fragment, container, false)
 
         val bookRecyclerView = view.findViewById<RecyclerView>(R.id.bookRecyclerView)
-        bookRecyclerView.layoutManager = GridLayoutManager(view.context, 2)
+        bookRecyclerView.layoutManager = LinearLayoutManager(view.context)
         val bookListAdapter = BookListAdapter()
         bookRecyclerView.adapter = bookListAdapter
         val query = bookBox.query().build()
@@ -105,5 +105,5 @@ class BookItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val title: TextView = view.findViewById(R.id.bookTitle)
     val author: TextView = view.findViewById(R.id.bookAuthor)
     val totalPages: TextView = view.findViewById(R.id.totalPageCount)
-    val cover: ImageView = view.findViewById(R.id.bookCoverInput)
+    val cover: ImageView = view.findViewById(R.id.bookCover)
 }

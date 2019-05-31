@@ -1,77 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
+
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/mtrl_card_spacing"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="@dimen/mtrl_card_spacing"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="#F5F5F6"
-        tools:layout_width="200dp"
-        android:id="@+id/materialCardView">
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
+        android:paddingEnd="32dp"
+        android:paddingStart="32dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+>
+
+    <de.frejasundalexchat.dritterchat.view.RoundedCornersImageView
+            tools:srcCompat="@tools:sample/avatars"
+            android:id="@+id/bookCover"
+            app:layout_constraintStart_toStartOf="parent"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#ddd"
+            android:layout_height="70dp"
+            android:layout_width="0dp"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintBottom_toTopOf="@id/hr"
+            android:layout_marginTop="16dp" android:layout_marginBottom="16dp"/>
+
+    <TextView
+            android:id="@+id/bookTitle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-    >
+            tools:text="Harry Potter"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/bookAuthor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bookAuthor"
+            app:layout_constraintBottom_toTopOf="@+id/totalPageCount"
+    />
 
-        <ImageView
-                tools:srcCompat="@tools:sample/avatars"
-                android:id="@+id/bookCoverInput"
-                app:layout_constraintStart_toStartOf="parent"
-                android:scaleType="centerCrop"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_weight="2"
-                android:background="#ddd"
-                android:layout_height="0dp"
-                android:layout_width="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintDimensionRatio="w,5:4"
-        />
+    <TextView
+            android:id="@+id/bookAuthor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            tools:text="Freja und alex"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bookTitle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/bookCover"
+    />
 
-        <TextView
-                android:id="@+id/bookTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                tools:text="Harry Potter"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/bookAuthor"
-                app:layout_constraintTop_toBottomOf="@+id/bookCoverInput" app:layout_constraintStart_toStartOf="parent"
-        />
+    <TextView
+            android:id="@+id/totalPageCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="399"
+            app:layout_constraintStart_toStartOf="@+id/bookAuthor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bookTitle"
+            app:layout_constraintBottom_toTopOf="@id/hr"
+            android:layout_marginBottom="16dp"
+    />
 
-        <TextView
-                android:id="@+id/bookAuthor"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                tools:text="Freja und alex"
-                app:layout_constraintStart_toStartOf="@+id/bookTitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bookTitle"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintBottom_toTopOf="@+id/totalPageCount"
-        />
+    <View
+            android:id="@+id/hr"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#ddd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+    />
 
-        <TextView
-                android:id="@+id/totalPageCount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                tools:text="399"
-                app:layout_constraintStart_toStartOf="@+id/bookTitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bookAuthor"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                android:layout_marginBottom="8dp"
-        />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
