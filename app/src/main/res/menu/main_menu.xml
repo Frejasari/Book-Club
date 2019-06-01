@@ -8,7 +8,7 @@
           app:showAsAction="always"
     />
 
-    <item android:title="all"
+    <item android:title="library"
           android:icon="@drawable/ic_all_24dp"
           android:id="@+id/all"
           app:showAsAction="always"

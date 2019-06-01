@@ -9,18 +9,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.Guideline
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import de.frejasundalexchat.dritterchat.R
 import de.frejasundalexchat.dritterchat.db.ObjectBox
 import de.frejasundalexchat.dritterchat.db.model.Book
 import de.frejasundalexchat.dritterchat.edit_book.EditBookActivity
 import io.objectbox.android.AndroidScheduler
 import io.objectbox.kotlin.boxFor
 import io.objectbox.reactive.DataSubscriptionList
+
 
 const val BOOK_ID = "BOOK_ID"
 
@@ -41,9 +42,9 @@ class LibraryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.library_fragment, container, false)
+        val view = inflater.inflate(de.frejasundalexchat.dritterchat.R.layout.library_fragment, container, false)
 
-        val bookRecyclerView = view.findViewById<RecyclerView>(R.id.bookRecyclerView)
+        val bookRecyclerView = view.findViewById<RecyclerView>(de.frejasundalexchat.dritterchat.R.id.bookRecyclerView)
         bookRecyclerView.layoutManager = LinearLayoutManager(view.context)
         val bookListAdapter = BookListAdapter(this::onBookClicked)
         bookRecyclerView.adapter = bookListAdapter
@@ -83,7 +84,7 @@ class BookListAdapter(val onBookClick: (id: Long) -> Unit) : RecyclerView.Adapte
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookItemViewHolder {
         return BookItemViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.library_list_item,
+                de.frejasundalexchat.dritterchat.R.layout.library_list_item,
                 parent,
                 false
             )
@@ -96,6 +97,8 @@ class BookListAdapter(val onBookClick: (id: Long) -> Unit) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: BookItemViewHolder, position: Int) {
         val book = books[position]
+
+        holder.setProgress(book)
         holder.bookView.setOnClickListener { onBookClick(book.id) }
         holder.title.text = book.title
         if (book.author.isEmpty()) {
@@ -110,13 +113,21 @@ class BookListAdapter(val onBookClick: (id: Long) -> Unit) : RecyclerView.Adapte
             holder.cover.setImageDrawable(null)
         }
     }
-
 }
 
 class BookItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val title: TextView = view.findViewById(R.id.bookTitle)
-    val author: TextView = view.findViewById(R.id.bookAuthor)
-    val totalPages: TextView = view.findViewById(R.id.pageCount)
-    val cover: ImageView = view.findViewById(R.id.bookCover)
-    val bookView: ConstraintLayout = view.findViewById(R.id.book)
+    val title: TextView = view.findViewById(de.frejasundalexchat.dritterchat.R.id.LibraryListItem_bookTitle)
+    val author: TextView = view.findViewById(de.frejasundalexchat.dritterchat.R.id.LibraryListItem_bookAuthor)
+    val totalPages: TextView = view.findViewById(de.frejasundalexchat.dritterchat.R.id.LibraryListItem_pageCount)
+    val cover: ImageView = view.findViewById(de.frejasundalexchat.dritterchat.R.id.LibraryListItem_bookCover)
+    val bookView: ConstraintLayout = view.findViewById(de.frejasundalexchat.dritterchat.R.id.book)
+    private val guideline: Guideline = view.findViewById(de.frejasundalexchat.dritterchat.R.id.LibraryListItem_backgroundGuideline)
+
+    fun setProgress(book: Book) {
+        val params = guideline.layoutParams as ConstraintLayout.LayoutParams
+        val percentRead: Float = book.currentPage.toFloat() / book.totalPages
+        params.guidePercent = percentRead
+        guideline.layoutParams = params
+    }
+
 }

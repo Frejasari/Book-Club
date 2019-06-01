@@ -1,81 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/book"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/book"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/LibraryListItem_backgroundGuideline"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingEnd="32dp"
-        android:paddingStart="32dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackground"
->
-
-    <de.frejasundalexchat.dritterchat.view.RoundedCornersImageView
-            tools:srcCompat="@tools:sample/avatars"
-            android:id="@+id/bookCover"
-            app:layout_constraintStart_toStartOf="parent"
-            android:scaleType="centerCrop"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="#ddd"
-            android:layout_height="70dp"
-            android:layout_width="0dp"
-            app:layout_constraintDimensionRatio="w,1:1"
-            app:layout_constraintBottom_toTopOf="@id/hr"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-    />
-
-    <TextView
-            android:id="@+id/bookTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            tools:text="Harry Potter"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/bookAuthor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bookAuthor"
-            app:layout_constraintBottom_toTopOf="@+id/pageCount"
-    />
-
-    <TextView
-            android:id="@+id/bookAuthor"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:textSize="16sp"
-            tools:text="Freja und alex"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/bookTitle"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/bookCover"
-    />
-
-    <TextView
-            android:id="@+id/pageCount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            tools:text="123 / 399"
-            app:layout_constraintStart_toStartOf="@+id/bookAuthor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bookTitle"
-            app:layout_constraintBottom_toTopOf="@id/hr"
-            android:layout_marginBottom="16dp"
-    />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
 
     <View
-            android:id="@+id/hr"
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="#ddd"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-    />
+        android:id="@+id/LibraryListItem_backgroundView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimarySuperLight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/LibraryListItem_backgroundGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.frejasundalexchat.dritterchat.view.RoundedCornersImageView
+        android:id="@+id/LibraryListItem_bookCover"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#ddd"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@id/LibraryListItem_hr"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+
+    <TextView
+        android:id="@+id/LibraryListItem_bookAuthor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/LibraryListItem_bookTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/LibraryListItem_bookCover"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Freja und alex" />
+
+    <TextView
+        android:id="@+id/LibraryListItem_bookTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/LibraryListItem_pageCount"
+        app:layout_constraintEnd_toEndOf="@id/LibraryListItem_bookAuthor"
+        app:layout_constraintStart_toStartOf="@+id/LibraryListItem_bookAuthor"
+        app:layout_constraintTop_toBottomOf="@+id/LibraryListItem_bookAuthor"
+        tools:text="Harry Potter" />
+
+    <TextView
+        android:id="@+id/LibraryListItem_pageCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/LibraryListItem_hr"
+        app:layout_constraintEnd_toEndOf="@id/LibraryListItem_bookAuthor"
+        app:layout_constraintStart_toStartOf="@+id/LibraryListItem_bookAuthor"
+        app:layout_constraintTop_toBottomOf="@+id/LibraryListItem_bookTitle"
+        tools:text="123 / 399" />
+
+    <View
+        android:id="@+id/LibraryListItem_hr"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/LibraryListItem_bookAuthor"
+        app:layout_constraintStart_toStartOf="@id/LibraryListItem_bookCover" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
