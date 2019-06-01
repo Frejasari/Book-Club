@@ -34,7 +34,7 @@ class EditBookFragment : Fragment() {
 
     private val REQUEST_IMAGE_CAPTURE = 19
 
-    private val coverUri: String? get() = book.imgUrl
+    private lateinit var coverUri: String
 
     private lateinit var titleInput: EditText
     private lateinit var authorInput: EditText
@@ -54,12 +54,8 @@ class EditBookFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         savedInstanceState?.let {
-            //            coverUri = it.getString(COVERURI) ?: ""
+            coverUri = it.getString(COVERURI) ?: ""
         }
-
-        val bookId = this.arguments!!.getLong(BOOK_ID)
-        book = bookBox.get(bookId)
-
     }
 
     override fun onCreateView(
@@ -75,25 +71,30 @@ class EditBookFragment : Fragment() {
         authorInput = view.findViewById(R.id.authorInput)
         pageCountInput = view.findViewById(R.id.pageCountInput)
         notesInput = view.findViewById(R.id.notesInput)
-
-        if (savedInstanceState == null) initializeInputs()
-        
         saveButton = view.findViewById(R.id.saveBookButton)
         abortButton = view.findViewById(R.id.abortButton)
-
         selectPictureButton = view.findViewById(R.id.coverImagePreview)
         coverImagePreview = view.findViewById(R.id.coverImagePreview)
         backArrow = view.findViewById(R.id.backArrow)
+
+        if (isFirstLoad(savedInstanceState)) {
+            initializeInputs()
+        }
+        else loadAndShowCoverImage()
 
         selectPictureButton.setOnClickListener(this::onSelectPicture)
         abortButton.setOnClickListener { activity?.finish() }
         backArrow.setOnClickListener { activity?.finish() }
         saveButton.setOnClickListener(this::onSave)
-
-        loadAndShowCoverImage()
     }
 
+    private fun isFirstLoad(savedInstanceState: Bundle?) = savedInstanceState == null
+
     private fun initializeInputs() {
+        val bookId = this.arguments!!.getLong(BOOK_ID)
+        book = bookBox.get(bookId)
+        coverUri = book.imgUrl
+        loadAndShowCoverImage()
         titleInput.setText(book.title)
         authorInput.setText(book.author)
         pageCountInput.setText(book.pageCount.toString())
@@ -116,13 +117,13 @@ class EditBookFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val file = File(currentPhotoPath)
-//            coverUri = Uri.fromFile(file).toString()
+            coverUri = Uri.fromFile(file).toString()
             loadAndShowCoverImage()
         }
     }
 
     private fun loadAndShowCoverImage() {
-        if (!coverUri.isNullOrBlank()) {
+        if (!coverUri.isBlank()) {
             Picasso.get().load(coverUri).fit().centerCrop().into(coverImagePreview)
         }
     }
@@ -132,7 +133,7 @@ class EditBookFragment : Fragment() {
         if (errors.isEmpty()) {
             bookBox.put(
                 Book(
-                    0, // new Object, initialized with 0
+                    arguments!!.getLong(BOOK_ID), // new Object, initialized with 0
                     LocalDateTime.now().toString(),
                     titleInput.text.toString(),
                     authorInput.text.toString(),

@@ -11,5 +11,5 @@ data class Book(
     val author: String,
     val pageCount: Int,
     val notes: String,
-    val imgUrl: String?
+    val imgUrl: String = ""
 )
