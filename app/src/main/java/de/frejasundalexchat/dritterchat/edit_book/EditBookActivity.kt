@@ -1,4 +1,4 @@
-package de.frejasundalexchat.dritterchat.editBook
+package de.frejasundalexchat.dritterchat.edit_book
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,7 @@ class EditBookActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_book)
+        setContentView(R.layout.edit_book_activity)
         if (savedInstanceState != null) return
 
         supportFragmentManager.beginTransaction()

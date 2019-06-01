@@ -43,7 +43,6 @@ class MainViewModel : ViewModel() {
 sealed class MenuFragment {
     object CurrentReadingCycle : MenuFragment()
     object Profile : MenuFragment()
-    object AddBook : MenuFragment()
     object BookOverview : MenuFragment()
     object Stats : MenuFragment()
 }

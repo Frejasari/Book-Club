@@ -14,12 +14,12 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme.NoActionBar">
         <activity
-                android:name=".editBook.EditBookActivity"
+                android:name=".edit_book.EditBookActivity"
                 android:label="Edit book"
                 android:windowSoftInputMode="adjustResize">
         </activity>
         <activity
-                android:name=".bookOverview.CreateBookActivity"
+                android:name=".add_book.AddBookActivity"
                 android:label="@string/title_activity_create_book"
                 android:windowSoftInputMode="adjustResize">
         </activity>

@@ -1,4 +1,4 @@
-package de.frejasundalexchat.dritterchat.bookOverview
+package de.frejasundalexchat.dritterchat.library
 
 import android.content.Intent
 import android.os.Bundle
@@ -17,20 +17,20 @@ import com.squareup.picasso.Picasso
 import de.frejasundalexchat.dritterchat.R
 import de.frejasundalexchat.dritterchat.db.ObjectBox
 import de.frejasundalexchat.dritterchat.db.model.Book
-import de.frejasundalexchat.dritterchat.editBook.EditBookActivity
+import de.frejasundalexchat.dritterchat.edit_book.EditBookActivity
 import io.objectbox.android.AndroidScheduler
 import io.objectbox.kotlin.boxFor
 import io.objectbox.reactive.DataSubscriptionList
 
 const val BOOK_ID = "BOOK_ID"
 
-class BookOverviewFragment : Fragment() {
+class LibraryFragment : Fragment() {
 
     companion object {
-        fun newInstance() = BookOverviewFragment()
+        fun newInstance() = LibraryFragment()
     }
 
-    private lateinit var viewModel: BookOverviewViewModel
+    private lateinit var viewModel: LibraryViewModel
 
     private val dataSubscriptionList = DataSubscriptionList()
 
@@ -41,7 +41,7 @@ class BookOverviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.book_overview_fragment, container, false)
+        val view = inflater.inflate(R.layout.library_fragment, container, false)
 
         val bookRecyclerView = view.findViewById<RecyclerView>(R.id.bookRecyclerView)
         bookRecyclerView.layoutManager = LinearLayoutManager(view.context)
@@ -67,7 +67,7 @@ class BookOverviewFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(BookOverviewViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(LibraryViewModel::class.java)
     }
 
     override fun onDestroyView() {
@@ -83,7 +83,7 @@ class BookListAdapter(val onBookClick: (id: Long) -> Unit) : RecyclerView.Adapte
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookItemViewHolder {
         return BookItemViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.book_list_item,
+                R.layout.library_list_item,
                 parent,
                 false
             )
@@ -116,7 +116,7 @@ class BookListAdapter(val onBookClick: (id: Long) -> Unit) : RecyclerView.Adapte
 class BookItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val title: TextView = view.findViewById(R.id.bookTitle)
     val author: TextView = view.findViewById(R.id.bookAuthor)
-    val totalPages: TextView = view.findViewById(R.id.totalPageCount)
+    val totalPages: TextView = view.findViewById(R.id.pageCount)
     val cover: ImageView = view.findViewById(R.id.bookCover)
     val bookView: ConstraintLayout = view.findViewById(R.id.book)
 }

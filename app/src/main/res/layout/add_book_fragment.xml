@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/outerPaddddding"
     android:paddingTop="@dimen/outerPaddddding"
     android:paddingRight="@dimen/outerPaddddding"
-    tools:context=".bookOverview.CreateBookActivity">
+    tools:context=".add_book.AddBookActivity">
 
     <ImageButton
         android:id="@+id/AddBookFragment_backArrow"

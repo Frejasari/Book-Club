@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import de.frejasundalexchat.dritterchat.bookOverview.BookOverviewFragment
-import de.frejasundalexchat.dritterchat.bookOverview.CreateBookActivity
+import de.frejasundalexchat.dritterchat.add_book.AddBookActivity
+import de.frejasundalexchat.dritterchat.library.LibraryFragment
 import de.frejasundalexchat.dritterchat.menu.CurrentFragment
 import de.frejasundalexchat.dritterchat.menu.ProfileFragment
 import de.frejasundalexchat.dritterchat.menu.StatsFragment
@@ -16,7 +16,7 @@ import de.frejasundalexchat.dritterchat.menu.StatsFragment
 class MainActivity : AppCompatActivity() {
 
     private val CURRENT = "CURRENT"
-    private val ALL = "ALL"
+    private val LIBRARY = "LIBRARY"
     private val PROFILE = "PROFILE"
     private val STATS = "STATS"
 
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.menuFragment.observe(this, Observer { menuFragment ->
             when (menuFragment) {
                 MenuFragment.CurrentReadingCycle -> showCurrentFragment()
-                MenuFragment.BookOverview -> showBookOverviewFragment()
+                MenuFragment.BookOverview -> showLibraryFragment()
                 MenuFragment.Stats -> showStatsFragment()
                 MenuFragment.Profile -> showSelfFragment()
             }
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showAddBook() {
-        startActivity(Intent(this, CreateBookActivity::class.java))
+        startActivity(Intent(this, AddBookActivity::class.java))
     }
 
     private fun showSelfFragment() {
@@ -58,8 +58,8 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(StatsFragment(), STATS)
     }
 
-    private fun showBookOverviewFragment() {
-        replaceFragment(BookOverviewFragment(), ALL)
+    private fun showLibraryFragment() {
+        replaceFragment(LibraryFragment(), LIBRARY)
     }
 
     private fun showCurrentFragment() {

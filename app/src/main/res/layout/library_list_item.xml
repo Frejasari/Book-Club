@@ -39,7 +39,7 @@
             app:layout_constraintStart_toStartOf="@+id/bookAuthor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bookAuthor"
-            app:layout_constraintBottom_toTopOf="@+id/totalPageCount"
+            app:layout_constraintBottom_toTopOf="@+id/pageCount"
     />
 
     <TextView
@@ -57,10 +57,10 @@
     />
 
     <TextView
-            android:id="@+id/totalPageCount"
+            android:id="@+id/pageCount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="399"
+            tools:text="123 / 399"
             app:layout_constraintStart_toStartOf="@+id/bookAuthor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bookTitle"

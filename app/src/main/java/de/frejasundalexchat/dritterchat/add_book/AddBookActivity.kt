@@ -1,15 +1,15 @@
-package de.frejasundalexchat.dritterchat.bookOverview
+package de.frejasundalexchat.dritterchat.add_book
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import de.frejasundalexchat.dritterchat.R
 
 
-class CreateBookActivity : AppCompatActivity() {
+class AddBookActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_book)
+        setContentView(R.layout.add_book_activity)
     }
 
 }

@@ -1,4 +1,4 @@
-package de.frejasundalexchat.dritterchat.editBook
+package de.frejasundalexchat.dritterchat.edit_book
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -17,9 +17,9 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
 import com.squareup.picasso.Picasso
 import de.frejasundalexchat.dritterchat.R
-import de.frejasundalexchat.dritterchat.bookOverview.BOOK_ID
-import de.frejasundalexchat.dritterchat.bookOverview.COVERURI
-import de.frejasundalexchat.dritterchat.bookOverview.getTextAsInt
+import de.frejasundalexchat.dritterchat.library.BOOK_ID
+import de.frejasundalexchat.dritterchat.add_book.COVERURI
+import de.frejasundalexchat.dritterchat.add_book.getTextAsInt
 import de.frejasundalexchat.dritterchat.db.ObjectBox
 import de.frejasundalexchat.dritterchat.db.model.Book
 import de.frejasundalexchat.dritterchat.error.ValidationError
@@ -61,7 +61,7 @@ class EditBookFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_edit_book, container, false)
+        return inflater.inflate(R.layout.edit_book_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

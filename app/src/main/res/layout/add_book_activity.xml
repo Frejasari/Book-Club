@@ -4,13 +4,13 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".bookOverview.EditBookActivity">
+        tools:context=".library.EditBookActivity">
     <fragment
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="de.frejasundalexchat.dritterchat.bookOverview.CreateBookFragment"
+            android:name="de.frejasundalexchat.dritterchat.add_book.AddBookFragment"
             android:id="@+id/editBookFragment"
-            tools:layout="@layout/fragment_create_book"
+            tools:layout="@layout/add_book_fragment"
     />
 
 </FrameLayout>

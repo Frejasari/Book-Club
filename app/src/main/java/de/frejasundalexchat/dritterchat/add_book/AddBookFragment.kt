@@ -1,4 +1,4 @@
-package de.frejasundalexchat.dritterchat.bookOverview
+package de.frejasundalexchat.dritterchat.add_book
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -35,7 +35,7 @@ import java.util.*
 const val TITLE = "book title"
 const val COVERURI = "book cover url"
 
-class CreateBookFragment : Fragment() {
+class AddBookFragment : Fragment() {
 
     private val REQUEST_IMAGE_CAPTURE = 19
 
@@ -57,8 +57,8 @@ class CreateBookFragment : Fragment() {
     private var currentPhotoPath: String? = null
 
     companion object {
-        fun newInstance(): CreateBookFragment {
-            val fragment = CreateBookFragment()
+        fun newInstance(): AddBookFragment {
+            val fragment = AddBookFragment()
             return fragment
         }
     }
@@ -74,7 +74,7 @@ class CreateBookFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_create_book, container, false)
+        return inflater.inflate(R.layout.add_book_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

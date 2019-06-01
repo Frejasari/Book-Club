@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/outerPaddddding"
     android:paddingTop="@dimen/outerPaddddding"
     android:paddingRight="@dimen/outerPaddddding"
-    tools:context=".editBook.EditBookActivity">
+    tools:context=".edit_book.EditBookActivity">
 
     <ImageButton
         android:id="@+id/EditBookFragment_backArrow"
