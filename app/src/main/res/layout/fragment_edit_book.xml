@@ -1,158 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".editBook.EditBookActivity"
-        android:paddingLeft="@dimen/outerPaddddding"
-        android:paddingTop="@dimen/outerPaddddding"
-        android:paddingRight="@dimen/outerPaddddding"
->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/outerPaddddding"
+    android:paddingTop="@dimen/outerPaddddding"
+    android:paddingRight="@dimen/outerPaddddding"
+    tools:context=".editBook.EditBookActivity">
 
     <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:id="@+id/backArrow"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/headline"
-            app:layout_constraintBottom_toBottomOf="@+id/headline"
-            app:layout_constraintDimensionRatio="w,1:1"
-            app:layout_constraintEnd_toStartOf="@+id/headline"
-            app:srcCompat="@drawable/caret_left"
-            android:scaleType="fitCenter"
-            app:layout_constraintHorizontal_bias="0.0"/>
+        android:id="@+id/EditBookFragment_backArrow"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/EditBookFragment_headline"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintEnd_toStartOf="@+id/EditBookFragment_headline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/EditBookFragment_headline"
+        app:srcCompat="@drawable/caret_left" />
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/edit_book_title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/headline"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/contentScroll"
-            app:layout_constraintVertical_bias="0.0"/>
+        android:id="@+id/EditBookFragment_headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/edit_book_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toTopOf="@+id/EditBookFragment_contentScroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <ScrollView
-            android:id="@+id/contentScroll"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/headline" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/abortButton">
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        android:id="@+id/EditBookFragment_contentScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/EditBookFragment_abortButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditBookFragment_headline">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <include
-                    layout="@layout/create_image_button"
-                    android:layout_gravity="center"
-                    android:layout_height="200dp"
-                    android:layout_width="200dp"/>
+                android:id="@+id/EditBookFragment_imageButton"
+                layout="@layout/create_image_button"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/bookTitleInputLayout"
+                android:id="@+id/EditBookFragment_bookTitleInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/create_book_title_hint"
+                app:layout_constraintBottom_toTopOf="@+id/EditBookFragment_bookAuthorInputLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/EditBookFragment_imageButton">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/EditBookFragment_titleInput"
+                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
-                <com.google.android.material.textfield.TextInputEditText
-                        android:drawableStart="@drawable/ic_current_24dp"
-                        android:drawablePadding="10dp"
-                        android:id="@+id/titleInput"
-                        android:inputType="text|textMultiLine"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/create_book_title_hint"
-                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
-                />
+                    android:inputType="text|textMultiLine" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/bookAuthorInputLayout"
+                android:id="@+id/EditBookFragment_bookAuthorInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/create_book_author_hint"
+                app:layout_constraintBottom_toTopOf="@+id/EditBookFragment_currentPageInputLayout"
+                app:layout_constraintEnd_toEndOf="@+id/EditBookFragment_bookTitleInputLayout"
+                app:layout_constraintStart_toStartOf="@+id/EditBookFragment_bookTitleInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/EditBookFragment_bookTitleInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/EditBookFragment_authorInput"
+                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
-                <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/authorInput"
-                        android:inputType="text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/create_book_author_hint"
-                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
-                />
+                    android:inputType="text" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/pageCountInputLayout"
+                android:id="@+id/EditBookFragment_currentPageInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/edit_book_current_page_hint"
+                app:layout_constraintBottom_toTopOf="@+id/EditBookFragment_notesInputLayout"
+                app:layout_constraintEnd_toStartOf="@+id/EditBookFragment_totalPagesInputLayout"
+                app:layout_constraintStart_toStartOf="@+id/EditBookFragment_bookTitleInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/EditBookFragment_bookAuthorInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/EditBookFragment_currentPageInput"
+                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
-                <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/pageCountInput"
-                        android:inputType="number"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/create_book_page_count_hint"
-                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
-                />
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/notesInputLayout"
+                android:id="@+id/EditBookFragment_totalPagesInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/create_book_page_count_hint"
+                app:layout_constraintBottom_toBottomOf="@+id/EditBookFragment_currentPageInputLayout"
+                app:layout_constraintEnd_toEndOf="@+id/EditBookFragment_bookTitleInputLayout"
+                app:layout_constraintStart_toEndOf="@+id/EditBookFragment_currentPageInputLayout"
+                app:layout_constraintTop_toTopOf="@+id/EditBookFragment_currentPageInputLayout">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/EditBookFragment_totalPagesInput"
+                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="0dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
-                <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/notesInput"
-                        android:inputType="text|textMultiLine"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/create_book_notes"
-                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"/>
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/EditBookFragment_notesInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/create_book_notes"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/EditBookFragment_bookTitleInputLayout"
+                app:layout_constraintStart_toStartOf="@+id/EditBookFragment_bookTitleInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/EditBookFragment_currentPageInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/EditBookFragment_notesInput"
+                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text|textMultiLine" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <Button
-            android:id="@+id/abortButton"
-            android:text="@string/create_book_abort"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/saveBookButton"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/saveBookButton"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintTop_toTopOf="@+id/saveBookButton"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-            android:textColor="#E91E63"/>
+        android:id="@+id/EditBookFragment_abortButton"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/create_book_abort"
+        android:textColor="#E91E63"
+        app:layout_constraintBottom_toBottomOf="@+id/EditBookFragment_saveBookButton"
+        app:layout_constraintEnd_toStartOf="@+id/EditBookFragment_saveBookButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/EditBookFragment_saveBookButton" />
+
     <Button
-            android:id="@+id/saveBookButton"
-            android:text="@string/create_book_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toEndOf="@+id/abortButton"
-            android:layout_marginStart="8dp"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"/>
+        android:id="@+id/EditBookFragment_saveBookButton"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/create_book_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/EditBookFragment_abortButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

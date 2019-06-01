@@ -9,7 +9,8 @@ data class Book(
     val createdAd: String,
     val title: String,
     val author: String,
-    val pageCount: Int,
+    val currentPage: Int = 0,
+    val totalPages: Int,
     val notes: String,
-    val imgUrl: String = ""
+    val coverUrl: String = ""
 )

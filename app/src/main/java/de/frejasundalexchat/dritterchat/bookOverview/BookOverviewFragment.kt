@@ -76,7 +76,7 @@ class BookOverviewFragment : Fragment() {
     }
 }
 
-class BookListAdapter(val onBookClick: (id:Long) ->Unit) : RecyclerView.Adapter<BookItemViewHolder>() {
+class BookListAdapter(val onBookClick: (id: Long) -> Unit) : RecyclerView.Adapter<BookItemViewHolder>() {
 
     var books: List<Book> = listOf()
 
@@ -103,9 +103,9 @@ class BookListAdapter(val onBookClick: (id:Long) ->Unit) : RecyclerView.Adapter<
         } else {
             holder.author.text = book.author
         }
-        holder.totalPages.text = "0 / ${book.pageCount}"
-        if (!book.imgUrl.isNullOrBlank()) {
-            Picasso.get().load(book.imgUrl).fit().centerCrop().into(holder.cover)
+        holder.totalPages.text = "${book.currentPage} / ${book.totalPages}"
+        if (!book.coverUrl.isNullOrBlank()) {
+            Picasso.get().load(book.coverUrl).fit().centerCrop().into(holder.cover)
         } else {
             holder.cover.setImageDrawable(null)
         }

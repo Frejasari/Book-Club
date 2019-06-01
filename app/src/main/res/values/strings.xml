@@ -7,10 +7,11 @@
     <string name="create_new_book_title">Create new book</string>
     <string name="create_book_title_hint">Title</string>
     <string name="create_book_author_hint">Author</string>
-    <string name="create_book_page_count_hint">Total Number Of Pages</string>
+    <string name="create_book_page_count_hint">Total Pages</string>
     <string name="create_book_abort">Abort</string>
     <string name="create_book_save">Save</string>
     <string name="create_book_notes">Notes</string>
     <string name="add_book_button">Add</string>
     <string name="edit_book_title">Edit Book</string>
+    <string name="edit_book_current_page_hint">Current Page</string>
 </resources>

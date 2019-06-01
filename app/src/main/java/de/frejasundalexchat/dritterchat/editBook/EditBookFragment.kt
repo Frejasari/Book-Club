@@ -27,8 +27,6 @@ import io.objectbox.kotlin.boxFor
 import org.threeten.bp.LocalDateTime
 import java.io.File
 import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 
 class EditBookFragment : Fragment() {
 
@@ -38,7 +36,8 @@ class EditBookFragment : Fragment() {
 
     private lateinit var titleInput: EditText
     private lateinit var authorInput: EditText
-    private lateinit var pageCountInput: EditText
+    private lateinit var totalPagesInput: EditText
+    private lateinit var currentPageInput: EditText
     private lateinit var notesInput: EditText
     private lateinit var saveButton: Button
     private lateinit var abortButton: Button
@@ -67,20 +66,20 @@ class EditBookFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        titleInput = view.findViewById(R.id.titleInput)
-        authorInput = view.findViewById(R.id.authorInput)
-        pageCountInput = view.findViewById(R.id.pageCountInput)
-        notesInput = view.findViewById(R.id.notesInput)
-        saveButton = view.findViewById(R.id.saveBookButton)
-        abortButton = view.findViewById(R.id.abortButton)
+        titleInput = view.findViewById(R.id.EditBookFragment_titleInput)
+        authorInput = view.findViewById(R.id.EditBookFragment_authorInput)
+        totalPagesInput = view.findViewById(R.id.EditBookFragment_totalPagesInput)
+        currentPageInput = view.findViewById(R.id.EditBookFragment_currentPageInput)
+        notesInput = view.findViewById(R.id.EditBookFragment_notesInput)
+        saveButton = view.findViewById(R.id.EditBookFragment_saveBookButton)
+        abortButton = view.findViewById(R.id.EditBookFragment_abortButton)
         selectPictureButton = view.findViewById(R.id.coverImagePreview)
         coverImagePreview = view.findViewById(R.id.coverImagePreview)
-        backArrow = view.findViewById(R.id.backArrow)
+        backArrow = view.findViewById(R.id.EditBookFragment_backArrow)
 
         if (isFirstLoad(savedInstanceState)) {
             initializeInputs()
-        }
-        else loadAndShowCoverImage()
+        } else loadAndShowCoverImage()
 
         selectPictureButton.setOnClickListener(this::onSelectPicture)
         abortButton.setOnClickListener { activity?.finish() }
@@ -93,11 +92,12 @@ class EditBookFragment : Fragment() {
     private fun initializeInputs() {
         val bookId = this.arguments!!.getLong(BOOK_ID)
         book = bookBox.get(bookId)
-        coverUri = book.imgUrl
+        coverUri = book.coverUrl
         loadAndShowCoverImage()
         titleInput.setText(book.title)
         authorInput.setText(book.author)
-        pageCountInput.setText(book.pageCount.toString())
+        totalPagesInput.setText(book.totalPages.toString())
+        currentPageInput.setText(book.currentPage.toString())
         notesInput.setText(book.notes)
     }
 
@@ -135,11 +135,12 @@ class EditBookFragment : Fragment() {
                 Book(
                     arguments!!.getLong(BOOK_ID), // new Object, initialized with 0
                     LocalDateTime.now().toString(),
-                    titleInput.text.toString(),
-                    authorInput.text.toString(),
-                    pageCountInput.getTextAsInt(),
-                    notesInput.text.toString(),
-                    coverUri
+                    title = titleInput.text.toString(),
+                    author = authorInput.text.toString(),
+                    currentPage = currentPageInput.getTextAsInt(),
+                    totalPages = totalPagesInput.getTextAsInt(),
+                    notes = notesInput.text.toString(),
+                    coverUrl = coverUri
 //                    listOf(notesInput.text.toString())
                 )
             )
@@ -178,7 +179,7 @@ class EditBookFragment : Fragment() {
     @Throws(IOException::class)
     private fun createImageFile(): File {
         // Create an image file name
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
+        val timeStamp: String = LocalDateTime.now().toString()
         val storageDir: File = activity!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
         return File.createTempFile(
             "JPEG_${timeStamp}_", /* prefix */
@@ -197,7 +198,7 @@ class EditBookFragment : Fragment() {
     private fun validateInput(): List<ValidationError> {
         val errors = mutableListOf<ValidationError>()
         if (titleInput.text.isBlank()) {
-            errors.add(ValidationError(R.id.bookTitleInputLayout, "Please set a title."))
+            errors.add(ValidationError(R.id.EditBookFragment_bookTitleInputLayout, "Please set a title."))
         }
         return errors
     }

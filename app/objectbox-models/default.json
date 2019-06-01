@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:3240262429553695616",
-      "lastPropertyId": "7:2322667619498459875",
+      "lastPropertyId": "10:2854425593983470452",
       "name": "Book",
       "properties": [
         {
@@ -15,14 +15,6 @@
         {
           "id": "2:7103784826474827685",
           "name": "title"
-        },
-        {
-          "id": "3:6738714198137054385",
-          "name": "imgUrl"
-        },
-        {
-          "id": "4:3813644593349600444",
-          "name": "pageCount"
         },
         {
           "id": "5:3477618997446990525",
@@ -35,6 +27,18 @@
         {
           "id": "7:2322667619498459875",
           "name": "createdAd"
+        },
+        {
+          "id": "8:1586149112622889827",
+          "name": "currentPage"
+        },
+        {
+          "id": "9:6313152865511967730",
+          "name": "totalPages"
+        },
+        {
+          "id": "10:2854425593983470452",
+          "name": "coverUrl"
         }
       ],
       "relations": []
@@ -48,7 +52,10 @@
   "modelVersionParserMinimum": 4,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    6738714198137054385,
+    3813644593349600444
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

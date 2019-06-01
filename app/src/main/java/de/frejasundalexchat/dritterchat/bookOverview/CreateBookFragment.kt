@@ -43,7 +43,8 @@ class CreateBookFragment : Fragment() {
 
     private lateinit var titleInput: EditText
     private lateinit var authorInput: EditText
-    private lateinit var pageCountInput: EditText
+    private lateinit var totalPagesInput: EditText
+    private lateinit var currentPageInput: EditText
     private lateinit var notesInput: EditText
     private lateinit var saveButton: Button
     private lateinit var abortButton: Button
@@ -78,15 +79,16 @@ class CreateBookFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        titleInput = view.findViewById(R.id.titleInput)
-        authorInput = view.findViewById(R.id.authorInput)
-        pageCountInput = view.findViewById(R.id.pageCountInput)
-        notesInput = view.findViewById(R.id.notesInput)
-        saveButton = view.findViewById(R.id.saveBookButton)
-        abortButton = view.findViewById(R.id.abortButton)
+        titleInput = view.findViewById(R.id.AddBookFragment_titleInput)
+        authorInput = view.findViewById(R.id.AddBookFragment_authorInput)
+        totalPagesInput = view.findViewById(R.id.AddBookFragment_totalPagesInput)
+        currentPageInput = view.findViewById(R.id.AddBookFragment_currentPageInput)
+        notesInput = view.findViewById(R.id.AddBookFragment_notesInput)
+        saveButton = view.findViewById(R.id.AddBookFragment_saveBookButton)
+        abortButton = view.findViewById(R.id.AddBookFragment_abortButton)
         selectPictureButton = view.findViewById(R.id.coverImagePreview)
         coverImagePreview = view.findViewById(R.id.coverImagePreview)
-        backArrow = view.findViewById(R.id.backArrow)
+        backArrow = view.findViewById(R.id.AddBookFragment_backArrow)
 
         selectPictureButton.setOnClickListener(this::onSelectPicture)
         abortButton.setOnClickListener { activity?.finish() }
@@ -122,11 +124,12 @@ class CreateBookFragment : Fragment() {
                 Book(
                     0, // new Object, initialized with 0
                     LocalDateTime.now().toString(),
-                    titleInput.text.toString(),
-                    authorInput.text.toString(),
-                    pageCountInput.getTextAsInt(),
-                    notesInput.text.toString(),
-                    coverUri
+                    title = titleInput.text.toString(),
+                    author = authorInput.text.toString(),
+                    currentPage = currentPageInput.getTextAsInt(),
+                    totalPages = totalPagesInput.getTextAsInt(),
+                    notes = notesInput.text.toString(),
+                    coverUrl = coverUri
 //                    listOf(notesInput.text.toString())
                 )
             )
@@ -184,7 +187,7 @@ class CreateBookFragment : Fragment() {
     private fun validateInput(): List<ValidationError> {
         val errors = mutableListOf<ValidationError>()
         if (titleInput.text.isBlank()) {
-            errors.add(ValidationError(R.id.bookTitleInputLayout, "Please set a title."))
+            errors.add(ValidationError(R.id.EditBookFragment_bookTitleInputLayout, "Please set a title."))
         }
         return errors
     }
