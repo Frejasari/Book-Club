@@ -1,4 +1,4 @@
-package de.frejasundalexchat.dritterchat.bookOverview
+package de.frejasundalexchat.dritterchat.editBook
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -6,9 +6,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +13,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.content.FileProvider
-import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
 import com.squareup.picasso.Picasso
 import de.frejasundalexchat.dritterchat.R
+import de.frejasundalexchat.dritterchat.bookOverview.BOOK_ID
+import de.frejasundalexchat.dritterchat.bookOverview.COVERURI
+import de.frejasundalexchat.dritterchat.bookOverview.getTextAsInt
 import de.frejasundalexchat.dritterchat.db.ObjectBox
 import de.frejasundalexchat.dritterchat.db.model.Book
 import de.frejasundalexchat.dritterchat.error.ValidationError
@@ -31,15 +30,11 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-const val TITLE = "book title"
-const val COVERURI = "book cover url"
-
-class CreateBookFragment : Fragment() {
+class EditBookFragment : Fragment() {
 
     private val REQUEST_IMAGE_CAPTURE = 19
 
-    private var coverUri: String = ""
+    private val coverUri: String? get() = book.imgUrl
 
     private lateinit var titleInput: EditText
     private lateinit var authorInput: EditText
@@ -50,30 +45,28 @@ class CreateBookFragment : Fragment() {
     private lateinit var selectPictureButton: View
     private lateinit var coverImagePreview: ImageView
     private lateinit var backArrow: View
+    private lateinit var book: Book
 
     private val bookBox = ObjectBox.get().boxFor(Book::class)
 
     private var currentPhotoPath: String? = null
 
-    companion object {
-        fun newInstance(): CreateBookFragment {
-            val fragment = CreateBookFragment()
-            return fragment
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         savedInstanceState?.let {
-            coverUri = it.getString(COVERURI) ?: ""
+            //            coverUri = it.getString(COVERURI) ?: ""
         }
+
+        val bookId = this.arguments!!.getLong(BOOK_ID)
+        book = bookBox.get(bookId)
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_create_book, container, false)
+        return inflater.inflate(R.layout.fragment_edit_book, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,8 +75,12 @@ class CreateBookFragment : Fragment() {
         authorInput = view.findViewById(R.id.authorInput)
         pageCountInput = view.findViewById(R.id.pageCountInput)
         notesInput = view.findViewById(R.id.notesInput)
+
+        if (savedInstanceState == null) initializeInputs()
+        
         saveButton = view.findViewById(R.id.saveBookButton)
         abortButton = view.findViewById(R.id.abortButton)
+
         selectPictureButton = view.findViewById(R.id.coverImagePreview)
         coverImagePreview = view.findViewById(R.id.coverImagePreview)
         backArrow = view.findViewById(R.id.backArrow)
@@ -96,6 +93,21 @@ class CreateBookFragment : Fragment() {
         loadAndShowCoverImage()
     }
 
+    private fun initializeInputs() {
+        titleInput.setText(book.title)
+        authorInput.setText(book.author)
+        pageCountInput.setText(book.pageCount.toString())
+        notesInput.setText(book.notes)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putString(COVERURI, coverUri)
         super.onSaveInstanceState(outState)
@@ -104,13 +116,13 @@ class CreateBookFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val file = File(currentPhotoPath)
-            coverUri = Uri.fromFile(file).toString()
+//            coverUri = Uri.fromFile(file).toString()
             loadAndShowCoverImage()
         }
     }
 
     private fun loadAndShowCoverImage() {
-        if (coverUri.isNotBlank()) {
+        if (!coverUri.isNullOrBlank()) {
             Picasso.get().load(coverUri).fit().centerCrop().into(coverImagePreview)
         }
     }
@@ -188,49 +200,4 @@ class CreateBookFragment : Fragment() {
         }
         return errors
     }
-}
-
-fun EditText.addOnTextChangedListener(onChange: (s: String) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
-        override fun afterTextChanged(s: Editable?) {}
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            if (s.isNullOrBlank()) {
-                onChange("")
-            }
-            onChange(s.toString())
-        }
-    })
-}
-
-fun View.getChildTree(level: Int) {
-    if (this !is ViewGroup) {
-        Log.i("childTree", " ${getLevelIcon(level)} view ${this.javaClass.name} | ${this.width} x ${this.height}")
-        return
-    }
-
-    Log.i("childTree", "${getLevelIcon(level)} viewgroup ${this.javaClass.name} | ${this.width} x ${this.height}")
-    for (child in children) {
-        if (child is ViewGroup) {
-            child.getChildTree(level + 1)
-        } else {
-            Log.i(
-                "childTree",
-                "${getLevelIcon(level + 1)} view ${child.javaClass.name} | ${this.width} x ${this.height}"
-            )
-        }
-    }
-}
-
-fun EditText.getTextAsInt(): Int {
-    return if (text.toString().isBlank()) 0
-    else text.toString().toInt()
-}
-
-fun getLevelIcon(level: Int): String {
-    var str = ""
-    for (i in 0 until level) {
-        str = "$str--"
-    }
-    return str
 }

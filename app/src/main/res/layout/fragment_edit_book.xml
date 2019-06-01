@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".bookOverview.CreateBookFragment"
+        tools:context=".editBook.EditBookActivity"
         android:paddingLeft="@dimen/outerPaddddding"
         android:paddingTop="@dimen/outerPaddddding"
         android:paddingRight="@dimen/outerPaddddding"
@@ -29,7 +29,7 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_new_book_title"
+            android:text="@string/edit_book_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
                 <com.google.android.material.textfield.TextInputEditText
                         android:drawableStart="@drawable/ic_current_24dp"
                         android:drawablePadding="10dp"
@@ -75,6 +75,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/create_book_title_hint"
+                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
                 />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,14 +84,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/authorInput"
                         android:inputType="text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/create_book_author_hint"
-                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"/>
+                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
+                />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -98,14 +100,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/pageCountInput"
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/create_book_page_count_hint"
-                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"/>
+                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
+                />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -113,14 +116,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="0dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/notesInput"
                         android:inputType="text|textMultiLine"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/create_book_notes"
-                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox"/>
+                        style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>

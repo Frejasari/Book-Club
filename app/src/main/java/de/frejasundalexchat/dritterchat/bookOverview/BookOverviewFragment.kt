@@ -1,11 +1,14 @@
 package de.frejasundalexchat.dritterchat.bookOverview
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,10 +17,12 @@ import com.squareup.picasso.Picasso
 import de.frejasundalexchat.dritterchat.R
 import de.frejasundalexchat.dritterchat.db.ObjectBox
 import de.frejasundalexchat.dritterchat.db.model.Book
+import de.frejasundalexchat.dritterchat.editBook.EditBookActivity
 import io.objectbox.android.AndroidScheduler
 import io.objectbox.kotlin.boxFor
 import io.objectbox.reactive.DataSubscriptionList
 
+const val BOOK_ID = "BOOK_ID"
 
 class BookOverviewFragment : Fragment() {
 
@@ -40,7 +45,7 @@ class BookOverviewFragment : Fragment() {
 
         val bookRecyclerView = view.findViewById<RecyclerView>(R.id.bookRecyclerView)
         bookRecyclerView.layoutManager = LinearLayoutManager(view.context)
-        val bookListAdapter = BookListAdapter()
+        val bookListAdapter = BookListAdapter(this::onBookClicked)
         bookRecyclerView.adapter = bookListAdapter
         val query = bookBox.query().build()
         query.subscribe(dataSubscriptionList)
@@ -53,10 +58,16 @@ class BookOverviewFragment : Fragment() {
         return view
     }
 
+    private fun onBookClicked(id: Long) {
+        startActivity(Intent(this.context, EditBookActivity::class.java).apply {
+            putExtra(BOOK_ID, id)
+        })
+        Log.i("TAG<", "MAKE CLICK HANDLING")
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(BookOverviewViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     override fun onDestroyView() {
@@ -65,7 +76,7 @@ class BookOverviewFragment : Fragment() {
     }
 }
 
-class BookListAdapter : RecyclerView.Adapter<BookItemViewHolder>() {
+class BookListAdapter(val onBookClick: (id:Long) ->Unit) : RecyclerView.Adapter<BookItemViewHolder>() {
 
     var books: List<Book> = listOf()
 
@@ -85,6 +96,7 @@ class BookListAdapter : RecyclerView.Adapter<BookItemViewHolder>() {
 
     override fun onBindViewHolder(holder: BookItemViewHolder, position: Int) {
         val book = books[position]
+        holder.bookView.setOnClickListener { onBookClick(book.id) }
         holder.title.text = book.title
         if (book.author.isEmpty()) {
             holder.author.text = "No Author"
@@ -106,4 +118,5 @@ class BookItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val author: TextView = view.findViewById(R.id.bookAuthor)
     val totalPages: TextView = view.findViewById(R.id.totalPageCount)
     val cover: ImageView = view.findViewById(R.id.bookCover)
+    val bookView: ConstraintLayout = view.findViewById(R.id.book)
 }
