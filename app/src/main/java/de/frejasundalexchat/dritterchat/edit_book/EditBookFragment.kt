@@ -96,7 +96,7 @@ class EditBookFragment : Fragment() {
         loadAndShowCoverImage()
         titleInput.setText(book.title)
         authorInput.setText(book.author)
-        totalPagesInput.setText(book.totalPages.toString())
+        totalPagesInput.setText(book.pageCount.toString())
         currentPageInput.setText(book.currentPage.toString())
         notesInput.setText(book.notes)
     }
@@ -138,7 +138,7 @@ class EditBookFragment : Fragment() {
                     title = titleInput.text.toString(),
                     author = authorInput.text.toString(),
                     currentPage = currentPageInput.getTextAsInt(),
-                    totalPages = totalPagesInput.getTextAsInt(),
+                    pageCount = totalPagesInput.getTextAsInt(),
                     notes = notesInput.text.toString(),
                     coverUrl = coverUri
 //                    listOf(notesInput.text.toString())

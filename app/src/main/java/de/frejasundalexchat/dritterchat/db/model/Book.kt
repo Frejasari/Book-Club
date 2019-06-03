@@ -10,7 +10,7 @@ data class Book(
     val title: String,
     val author: String,
     val currentPage: Int = 0,
-    val totalPages: Int,
+    val pageCount: Int,
     val notes: String,
     val coverUrl: String = ""
 )

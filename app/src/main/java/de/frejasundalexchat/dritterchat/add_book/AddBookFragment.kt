@@ -127,7 +127,7 @@ class AddBookFragment : Fragment() {
                     title = titleInput.text.toString(),
                     author = authorInput.text.toString(),
                     currentPage = currentPageInput.getTextAsInt(),
-                    totalPages = totalPagesInput.getTextAsInt(),
+                    pageCount = totalPagesInput.getTextAsInt(),
                     notes = notesInput.text.toString(),
                     coverUrl = coverUri
 //                    listOf(notesInput.text.toString())

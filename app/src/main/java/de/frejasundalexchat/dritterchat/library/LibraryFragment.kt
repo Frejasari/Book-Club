@@ -106,7 +106,7 @@ class BookListAdapter(val onBookClick: (id: Long) -> Unit) : RecyclerView.Adapte
         } else {
             holder.author.text = book.author
         }
-        holder.totalPages.text = "${book.currentPage} / ${book.totalPages}"
+        holder.totalPages.text = "${book.currentPage} / ${book.pageCount}"
         if (!book.coverUrl.isNullOrBlank()) {
             Picasso.get().load(book.coverUrl).fit().centerCrop().into(holder.cover)
         } else {
@@ -125,7 +125,7 @@ class BookItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun setProgress(book: Book) {
         val params = guideline.layoutParams as ConstraintLayout.LayoutParams
-        val percentRead: Float = book.currentPage.toFloat() / book.totalPages
+        val percentRead: Float = book.currentPage.toFloat() / book.pageCount
         params.guidePercent = percentRead
         guideline.layoutParams = params
     }
